@@ -1,12 +1,14 @@
+require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const url = "mongodb://localhost/Employee"
+require('dotenv').config()
 
 const app = express();
 
 const PORT = process.env.PORT || 9000
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || url)
 
 const con = mongoose.connection
 
@@ -24,3 +26,4 @@ app.use("/employees", employeeRouter)
 app.listen(PORT, () => {
     console.log("Server listening on port 5000...")
 })
+module.exports = app;
